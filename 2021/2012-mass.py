@@ -5,6 +5,8 @@ from scipy.signal import savgol_filter
 
 th = -0.0060
 plt.figure(figsize=(10,5))
+plt.xlim(75,235)
+plt.ylim(-0.06,0.007)
 mz = []
 mzi = []
 
@@ -58,7 +60,7 @@ plt.plot(x,y,'C1',label='2012 Riesling')
 plt.xlabel('m/z')
 plt.yticks([])
 plt.legend(loc=4)
-plt.xlim(75,235)
-plt.ylim(-0.06,0.007)
+#plt.xlim(75,235)
+#plt.ylim(-0.06,0.007)
 plt.savefig('2012riesling2021.png',dpi=400,bbox_inches='tight')
 plt.show()

@@ -1,8 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.signal import find_peaks
+from scipy.signal import savgol_filter
 
-th = -0.0015
+th = -0.0060
 plt.figure(figsize=(10,5))
 mz = []
 mzi = []
@@ -18,7 +19,10 @@ NY = '/Users/ben/Dropbox/Radical Spectroscopy/REMPI/NY/'
 #print('-- NO\n-- NP\n-- NT\n-- NU\n-- NX\n-- NY')
 
 #x,y = np.loadtxt(NU+'nu071b.dat',usecols=(2,3),unpack=True)
-x,y = np.loadtxt('nu071b.dat',usecols=(2,3),unpack=True)
+x,y = np.loadtxt('nu033ta.dat',unpack=True)
+y *=-10
+sg = savgol_filter(y,5,2)
+y = sg
 
 #Frist, baseline subtraction
 subr = np.logical_and(x>85,x<90)
@@ -50,10 +54,11 @@ for i in range(0,np.size(mz)):
     yy = mzi[i]-0.008
     plt.annotate(mz[i],(xx,yy),ha='center',fontsize=8)
 
-plt.plot(x,y,label='2008 Riesling')
+plt.plot(x,y,'C1',label='2012 Riesling')
 plt.xlabel('m/z')
 plt.yticks([])
 plt.legend(loc=4)
 plt.xlim(75,235)
-plt.savefig('riesling2021.png',dpi=400,bbox_inches='tight')
+plt.ylim(-0.06,0.007)
+plt.savefig('2012riesling2021.png',dpi=400,bbox_inches='tight')
 plt.show()
